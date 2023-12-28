@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS Departments (
 	id SERIAL PRIMARY KEY,
-	name varchar(40) UNIQUE NOT NULL
+	name varchar(100) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Employees (
