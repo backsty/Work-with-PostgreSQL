@@ -27,10 +27,11 @@ SELECT g.name, count(band_id) FROM Genre_Band gb
 LEFT JOIN Genre g ON gb.genre_id = g.id
 GROUP BY g.name;
 
---/*Количество треков, вошедших в альбомы 2019–2020 годов.*/
---SELECT count(t.id) FROM Track t
---LEFT JOIN Album a ON t.Album_id = a.id
---GROUP BY a.id;
+/*Количество треков, вошедших в альбомы 2019–2020 годов.*/
+SELECT a.name, count(t.id) FROM Track t
+LEFT JOIN Album a ON t.Album_id = a.id
+WHERE date_release BETWEEN 2019 AND 2020
+GROUP BY a.id;
 
 /*Средняя продолжительность треков по каждому альбому.*/
 SELECT a.name, avg(t.duration) FROM Track t
@@ -43,7 +44,7 @@ except
 	(SELECT b.name FROM band_album ba
 	JOIN Album a ON a.id = ba.Album_id
 	JOIN Bands b ON b.id = ba.Band_id
-	WHERE a.date_release = 2020);
+	WHERE a.date_release != 2020);
 
 /*Названия сборников, в которых присутствует конкретный исполнитель (выберите его сами).*/
 SELECT DISTINCT col.name FROM Collection col
