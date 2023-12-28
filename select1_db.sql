@@ -45,7 +45,6 @@ except
 	JOIN Bands b ON b.id = ba.Band_id
 	WHERE a.date_release = 2020);
 
-
 /*Названия сборников, в которых присутствует конкретный исполнитель (выберите его сами).*/
 SELECT DISTINCT col.name FROM Collection col
 JOIN Track_Collection tc ON tc.Collection_id = col.id
@@ -62,7 +61,7 @@ JOIN Bands b ON b.id = ba.Band_id
 JOIN Genre_Band gb ON gb.Band_id = b.id
 JOIN Genre g ON g.id = gb.Genre_id
 GROUP BY a.name
-HAVING count(g.name) > 1; 
+HAVING count(g.name) > 1;
 
 /*Наименования треков, которые не входят в сборники.*/
 SELECT DISTINCT t.name FROM Track t
@@ -72,7 +71,6 @@ WHERE tc.Collection_id IS NULL;
 /*Исполнитель или исполнители, написавшие самый короткий по продолжительности трек, — теоретически таких треков может быть несколько.*/
 SELECT DISTINCT t.name FROM Track t
 WHERE t.duration = (SELECT MIN(duration) FROM Track);
-
 
 /*Названия альбомов, содержащих наименьшее количество треков.*/
 SELECT a.name, count(t.id) FROM Album a
